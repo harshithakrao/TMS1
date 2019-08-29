@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9e34034db3ed4bc19e5002a7f315e31f" Name="Diagram1">
+        <EntityTypeShape EntityType="tmsdbModel.TM_Offence" Width="1.5" PointX="0.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tmsdbModel.TM_OwnerDetails" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tmsdbModel.TM_RegDetails" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tmsdbModel.TM_UserMaster" Width="1.5" PointX="4.875" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tmsdbModel.TM_VehicleDetails" Width="1.5" PointX="4.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tmsdbModel.Offence_Details" Width="1.5" PointX="2.5" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="tmsdbModel.FK__Offence_D__offen__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="tmsdbModel.FK__TM_RegDet__owner__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="tmsdbModel.FK__TM_RegDet__veh_i__4BAC3F29" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

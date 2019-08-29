@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tmsdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tmsdb.dbo.Offence_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Offence_Details">
+          <Key>
+            <PropertyRef Name="time" />
+            <PropertyRef Name="place" />
+            <PropertyRef Name="reported_by" />
+          </Key>
+          <Property Name="veh_no" Type="varchar" MaxLength="10" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="place" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="offence_id" Type="int" />
+          <Property Name="reported_by" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TM_Offence">
+          <Key>
+            <PropertyRef Name="offence_id" />
+          </Key>
+          <Property Name="offence_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="offence_type" Type="varchar" MaxLength="20" />
+          <Property Name="veh_type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="penalty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TM_OwnerDetails">
+          <Key>
+            <PropertyRef Name="owner_id" />
+          </Key>
+          <Property Name="owner_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="date_of_birth" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="landline_number" Type="bigint" />
+          <Property Name="mobile_no" Type="bigint" />
+          <Property Name="gender" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="temp_address" Type="varchar" MaxLength="200" />
+          <Property Name="permanent_address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pincode" Type="bigint" Nullable="false" />
+          <Property Name="occupation" Type="varchar" MaxLength="30" />
+          <Property Name="pancard_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="addressproof_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TM_RegDetails">
+          <Key>
+            <PropertyRef Name="appl_no" />
+          </Key>
+          <Property Name="appl_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="veh_no" Type="varchar" MaxLength="10" />
+          <Property Name="veh_id" Type="int" />
+          <Property Name="owner_id" Type="varchar" MaxLength="10" />
+          <Property Name="date_of_purchase" Type="datetime" Nullable="false" />
+          <Property Name="distributer_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TM_UserMaster">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="rolename" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TM_VehicleDetails">
+          <Key>
+            <PropertyRef Name="veh_id" />
+          </Key>
+          <Property Name="veh_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="veh_type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="engine_no" Type="varchar" MaxLength="10" />
+          <Property Name="model_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="veh_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="veh_color" Type="varchar" MaxLength="20" />
+          <Property Name="manufacturer_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="date_of_manufacture" Type="date" Nullable="false" />
+          <Property Name="no_of_cylinders" Type="int" />
+          <Property Name="cubic_capacity" Type="int" />
+          <Property Name="fuel_used" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Offence_D__offen__5812160E">
+          <End Role="TM_Offence" Type="Self.TM_Offence" Multiplicity="0..1" />
+          <End Role="Offence_Details" Type="Self.Offence_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TM_Offence">
+              <PropertyRef Name="offence_id" />
+            </Principal>
+            <Dependent Role="Offence_Details">
+              <PropertyRef Name="offence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Offence_D__veh_n__571DF1D5' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Offence_D__veh_n__571DF1D5" />-->
+        <Association Name="FK__TM_RegDet__owner__4CA06362">
+          <End Role="TM_OwnerDetails" Type="Self.TM_OwnerDetails" Multiplicity="0..1" />
+          <End Role="TM_RegDetails" Type="Self.TM_RegDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TM_OwnerDetails">
+              <PropertyRef Name="owner_id" />
+            </Principal>
+            <Dependent Role="TM_RegDetails">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TM_RegDet__veh_i__4BAC3F29">
+          <End Role="TM_VehicleDetails" Type="Self.TM_VehicleDetails" Multiplicity="0..1" />
+          <End Role="TM_RegDetails" Type="Self.TM_RegDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TM_VehicleDetails">
+              <PropertyRef Name="veh_id" />
+            </Principal>
+            <Dependent Role="TM_RegDetails">
+              <PropertyRef Name="veh_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tmsdbModelStoreContainer">
+          <EntitySet Name="TM_Offence" EntityType="Self.TM_Offence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TM_OwnerDetails" EntityType="Self.TM_OwnerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TM_RegDetails" EntityType="Self.TM_RegDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TM_UserMaster" EntityType="Self.TM_UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TM_VehicleDetails" EntityType="Self.TM_VehicleDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offence_Details" EntityType="Self.Offence_Details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Offence_Details].[veh_no] AS [veh_no], 
+    [Offence_Details].[time] AS [time], 
+    [Offence_Details].[place] AS [place], 
+    [Offence_Details].[offence_id] AS [offence_id], 
+    [Offence_Details].[reported_by] AS [reported_by]
+    FROM [dbo].[Offence_Details] AS [Offence_Details]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Offence_D__offen__5812160E" Association="Self.FK__Offence_D__offen__5812160E">
+            <End Role="TM_Offence" EntitySet="TM_Offence" />
+            <End Role="Offence_Details" EntitySet="Offence_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TM_RegDet__owner__4CA06362" Association="Self.FK__TM_RegDet__owner__4CA06362">
+            <End Role="TM_OwnerDetails" EntitySet="TM_OwnerDetails" />
+            <End Role="TM_RegDetails" EntitySet="TM_RegDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TM_RegDet__veh_i__4BAC3F29" Association="Self.FK__TM_RegDet__veh_i__4BAC3F29">
+            <End Role="TM_VehicleDetails" EntitySet="TM_VehicleDetails" />
+            <End Role="TM_RegDetails" EntitySet="TM_RegDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tmsdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TM_Offence">
+          <Key>
+            <PropertyRef Name="offence_id" />
+          </Key>
+          <Property Name="offence_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="offence_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="veh_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="penalty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Offence_Details" Relationship="Self.FK__Offence_D__offen__5812160E" FromRole="TM_Offence" ToRole="Offence_Details" />
+        </EntityType>
+        <EntityType Name="TM_OwnerDetails">
+          <Key>
+            <PropertyRef Name="owner_id" />
+          </Key>
+          <Property Name="owner_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_of_birth" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="landline_number" Type="Int64" />
+          <Property Name="mobile_no" Type="Int64" />
+          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="temp_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="permanent_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pincode" Type="Int64" Nullable="false" />
+          <Property Name="occupation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="pancard_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="addressproof_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TM_RegDetails" Relationship="Self.FK__TM_RegDet__owner__4CA06362" FromRole="TM_OwnerDetails" ToRole="TM_RegDetails" />
+        </EntityType>
+        <EntityType Name="TM_RegDetails">
+          <Key>
+            <PropertyRef Name="appl_no" />
+          </Key>
+          <Property Name="appl_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="veh_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="veh_id" Type="Int32" />
+          <Property Name="owner_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="date_of_purchase" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="distributer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TM_OwnerDetails" Relationship="Self.FK__TM_RegDet__owner__4CA06362" FromRole="TM_RegDetails" ToRole="TM_OwnerDetails" />
+          <NavigationProperty Name="TM_VehicleDetails" Relationship="Self.FK__TM_RegDet__veh_i__4BAC3F29" FromRole="TM_RegDetails" ToRole="TM_VehicleDetails" />
+        </EntityType>
+        <EntityType Name="TM_UserMaster">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rolename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TM_VehicleDetails">
+          <Key>
+            <PropertyRef Name="veh_id" />
+          </Key>
+          <Property Name="veh_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="veh_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="engine_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="model_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="veh_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="veh_color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="manufacturer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_of_manufacture" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="no_of_cylinders" Type="Int32" />
+          <Property Name="cubic_capacity" Type="Int32" />
+          <Property Name="fuel_used" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TM_RegDetails" Relationship="Self.FK__TM_RegDet__veh_i__4BAC3F29" FromRole="TM_VehicleDetails" ToRole="TM_RegDetails" />
+        </EntityType>
+        <EntityType Name="Offence_Details">
+          <Key>
+            <PropertyRef Name="time" />
+            <PropertyRef Name="place" />
+            <PropertyRef Name="reported_by" />
+          </Key>
+          <Property Name="veh_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="place" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="offence_id" Type="Int32" />
+          <Property Name="reported_by" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TM_Offence" Relationship="Self.FK__Offence_D__offen__5812160E" FromRole="Offence_Details" ToRole="TM_Offence" />
+        </EntityType>
+        <Association Name="FK__Offence_D__offen__5812160E">
+          <End Role="TM_Offence" Type="Self.TM_Offence" Multiplicity="0..1" />
+          <End Role="Offence_Details" Type="Self.Offence_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TM_Offence">
+              <PropertyRef Name="offence_id" />
+            </Principal>
+            <Dependent Role="Offence_Details">
+              <PropertyRef Name="offence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TM_RegDet__owner__4CA06362">
+          <End Role="TM_OwnerDetails" Type="Self.TM_OwnerDetails" Multiplicity="0..1" />
+          <End Role="TM_RegDetails" Type="Self.TM_RegDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TM_OwnerDetails">
+              <PropertyRef Name="owner_id" />
+            </Principal>
+            <Dependent Role="TM_RegDetails">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TM_RegDet__veh_i__4BAC3F29">
+          <End Role="TM_VehicleDetails" Type="Self.TM_VehicleDetails" Multiplicity="0..1" />
+          <End Role="TM_RegDetails" Type="Self.TM_RegDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TM_VehicleDetails">
+              <PropertyRef Name="veh_id" />
+            </Principal>
+            <Dependent Role="TM_RegDetails">
+              <PropertyRef Name="veh_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tmsdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TM_Offence" EntityType="Self.TM_Offence" />
+          <EntitySet Name="TM_OwnerDetails" EntityType="Self.TM_OwnerDetails" />
+          <EntitySet Name="TM_RegDetails" EntityType="Self.TM_RegDetails" />
+          <EntitySet Name="TM_UserMaster" EntityType="Self.TM_UserMaster" />
+          <EntitySet Name="TM_VehicleDetails" EntityType="Self.TM_VehicleDetails" />
+          <EntitySet Name="Offence_Details" EntityType="Self.Offence_Details" />
+          <AssociationSet Name="FK__Offence_D__offen__5812160E" Association="Self.FK__Offence_D__offen__5812160E">
+            <End Role="TM_Offence" EntitySet="TM_Offence" />
+            <End Role="Offence_Details" EntitySet="Offence_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TM_RegDet__owner__4CA06362" Association="Self.FK__TM_RegDet__owner__4CA06362">
+            <End Role="TM_OwnerDetails" EntitySet="TM_OwnerDetails" />
+            <End Role="TM_RegDetails" EntitySet="TM_RegDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TM_RegDet__veh_i__4BAC3F29" Association="Self.FK__TM_RegDet__veh_i__4BAC3F29">
+            <End Role="TM_VehicleDetails" EntitySet="TM_VehicleDetails" />
+            <End Role="TM_RegDetails" EntitySet="TM_RegDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tmsdbModelStoreContainer" CdmEntityContainer="tmsdbEntities">
+          <EntitySetMapping Name="TM_Offence">
+            <EntityTypeMapping TypeName="tmsdbModel.TM_Offence">
+              <MappingFragment StoreEntitySet="TM_Offence">
+                <ScalarProperty Name="offence_id" ColumnName="offence_id" />
+                <ScalarProperty Name="offence_type" ColumnName="offence_type" />
+                <ScalarProperty Name="veh_type" ColumnName="veh_type" />
+                <ScalarProperty Name="penalty" ColumnName="penalty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TM_OwnerDetails">
+            <EntityTypeMapping TypeName="tmsdbModel.TM_OwnerDetails">
+              <MappingFragment StoreEntitySet="TM_OwnerDetails">
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="landline_number" ColumnName="landline_number" />
+                <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="temp_address" ColumnName="temp_address" />
+                <ScalarProperty Name="permanent_address" ColumnName="permanent_address" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="occupation" ColumnName="occupation" />
+                <ScalarProperty Name="pancard_no" ColumnName="pancard_no" />
+                <ScalarProperty Name="addressproof_name" ColumnName="addressproof_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TM_RegDetails">
+            <EntityTypeMapping TypeName="tmsdbModel.TM_RegDetails">
+              <MappingFragment StoreEntitySet="TM_RegDetails">
+                <ScalarProperty Name="appl_no" ColumnName="appl_no" />
+                <ScalarProperty Name="veh_no" ColumnName="veh_no" />
+                <ScalarProperty Name="veh_id" ColumnName="veh_id" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="date_of_purchase" ColumnName="date_of_purchase" />
+                <ScalarProperty Name="distributer_name" ColumnName="distributer_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TM_UserMaster">
+            <EntityTypeMapping TypeName="tmsdbModel.TM_UserMaster">
+              <MappingFragment StoreEntitySet="TM_UserMaster">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TM_VehicleDetails">
+            <EntityTypeMapping TypeName="tmsdbModel.TM_VehicleDetails">
+              <MappingFragment StoreEntitySet="TM_VehicleDetails">
+                <ScalarProperty Name="veh_id" ColumnName="veh_id" />
+                <ScalarProperty Name="veh_type" ColumnName="veh_type" />
+                <ScalarProperty Name="engine_no" ColumnName="engine_no" />
+                <ScalarProperty Name="model_no" ColumnName="model_no" />
+                <ScalarProperty Name="veh_name" ColumnName="veh_name" />
+                <ScalarProperty Name="veh_color" ColumnName="veh_color" />
+                <ScalarProperty Name="manufacturer_name" ColumnName="manufacturer_name" />
+                <ScalarProperty Name="date_of_manufacture" ColumnName="date_of_manufacture" />
+                <ScalarProperty Name="no_of_cylinders" ColumnName="no_of_cylinders" />
+                <ScalarProperty Name="cubic_capacity" ColumnName="cubic_capacity" />
+                <ScalarProperty Name="fuel_used" ColumnName="fuel_used" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offence_Details">
+            <EntityTypeMapping TypeName="tmsdbModel.Offence_Details">
+              <MappingFragment StoreEntitySet="Offence_Details">
+                <ScalarProperty Name="veh_no" ColumnName="veh_no" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="offence_id" ColumnName="offence_id" />
+                <ScalarProperty Name="reported_by" ColumnName="reported_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

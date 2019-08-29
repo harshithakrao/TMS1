@@ -15,6 +15,10 @@ no_of_cylinders int,
 cubic_capacity int,
 fuel_used varchar(10))
 
+
+
+
+
 create table TM_OwnerDetails
 (owner_id varchar(10) primary key,
 fname varchar(20) not null,
@@ -38,7 +42,7 @@ owner_id varchar(10) foreign key references TM_OwnerDetails(owner_id),
 date_of_purchase datetime not null,
 distributer_name varchar(20) not null)
 
-drop table 
+
 
 create table TM_Offence
 (offence_id int primary key identity(10,1),
