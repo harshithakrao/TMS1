@@ -15,5 +15,10 @@ namespace TMS1.Controllers
         {
             return View();
         }
+         
+        //public ActionResult HomePage()
+        //{
+        //    return View();
+        //}
     }
 }
