@@ -5,3 +5,24 @@
 
 <h2>RTOLogin</h2>
 
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    {
+        <table border="1">
+            <tr>
+                <td>Enter Username</td>
+                <td><input type="text" id="txtun" name="txtun" /></td>
+            </tr>
+            <tr>
+                <td>Enter passsword</td>
+                <td><input type="password" id="txtp" name="txtp" /></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Login" /></td>
+            </tr>
+        </table>
+    }
+}

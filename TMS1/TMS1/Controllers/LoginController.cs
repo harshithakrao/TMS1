@@ -30,33 +30,47 @@ namespace TMS1.Controllers
         [HttpPost]
         public ActionResult RTOLogin()
         {
-            return View();
+             = Request.Form["txtun"].ToString();
+            pass = Request.Form["txtp"].ToString();
+
+            var res = db.TM_UserMaster.Where(x => x.username == uname && x.pass == pass).SingleOrDefault();
+
+
+            if (res == null)
+            {
+                ModelState.AddModelError("", "Invalid");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Login Successfull");
+
+                return View();
         }
 
 
-        public ActionResult PoliceLogin()
-        {
-            return View();
-        }
+        //public ActionResult PoliceLogin()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
+        //[HttpPost]
 
-        public ActionResult PoliceLogin()
-        {
-            return View();
-        }
+        //public ActionResult PoliceLogin()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult UserLogin()
-        {
-            return View();
-        }
+        //public ActionResult UserLogin()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
+        //[HttpPost]
 
-        public ActionResult UserLogin()
-        {
-            return View();
-        }
+        //public ActionResult UserLogin()
+        //{
+        //    return View();
+        //}
 
 
     }

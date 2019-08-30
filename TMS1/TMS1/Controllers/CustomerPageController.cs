@@ -13,24 +13,24 @@ namespace TMS1.Controllers
         {
             return View();
         }
-        [HttpPost]
+        //[HttpPost]
 
-        public ActionResult UserPage()
-        {
-            return View();
-        }
+        //public ActionResult UserPage()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult PaymentGateway()
-        {
-            return View();
-        }
+        //public ActionResult PaymentGateway()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
+        //[HttpPost]
 
-        public ActionResult PaymentGateway()
-        {
-            return View();
-        }
+        //public ActionResult PaymentGateway()
+        //{
+        //    return View();
+        //}
 
     }
 }
