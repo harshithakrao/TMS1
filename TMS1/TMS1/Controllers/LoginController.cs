@@ -15,10 +15,49 @@ namespace TMS1.Controllers
         {
             return View();
         }
-         
+
         //public ActionResult HomePage()
         //{
         //    return View();
         //}
+
+        
+        public ActionResult RTOLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RTOLogin()
+        {
+            return View();
+        }
+
+
+        public ActionResult PoliceLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
+        public ActionResult PoliceLogin()
+        {
+            return View();
+        }
+
+        public ActionResult UserLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
+        public ActionResult UserLogin()
+        {
+            return View();
+        }
+
+
     }
 }
